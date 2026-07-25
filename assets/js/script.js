@@ -55,13 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================================================
-  // 2. NAVEGAÇÃO DE PÁGINA (INÍCIO ATIVO)
+  // 2. NAVEGAÇÃO DE PÁGINA (LINK ATIVO CONFORME A PÁGINA ATUAL)
   // ==========================================================================
-  const inicioLink = document.querySelector('.nav-menu a[href="#inicio"]');
-  if (inicioLink) {
-    navLinks.forEach(l => l.classList.remove('active'));
-    inicioLink.classList.add('active');
-  }
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+    const linkPage = href.split('#')[0] || 'index.html';
+    if (linkPage === currentPage) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
 
 
   // ==========================================================================
@@ -118,4 +123,54 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializa a transição automática
     startSlideShow();
   }
+
+
+  // ==========================================================================
+  // 4. ACORDEÃO DE SERVIÇOS (PÁGINA SERVIÇOS)
+  // ==========================================================================
+  const servicoItems = document.querySelectorAll('.servico-item');
+
+  /**
+   * Fecha um item do acordeão de serviços
+   * @param {Element} item - Elemento .servico-item a ser fechado
+   */
+  const closeServicoItem = (item) => {
+    const toggle = item.querySelector('.servico-item-toggle');
+    const detail = item.querySelector('.servico-item-detail');
+    const label = item.querySelector('.servico-item-label');
+    toggle.setAttribute('aria-expanded', 'false');
+    label.textContent = 'Ver mais';
+    detail.style.maxHeight = null;
+  };
+
+  /**
+   * Abre um item do acordeão de serviços
+   * @param {Element} item - Elemento .servico-item a ser aberto
+   */
+  const openServicoItem = (item) => {
+    const toggle = item.querySelector('.servico-item-toggle');
+    const detail = item.querySelector('.servico-item-detail');
+    const label = item.querySelector('.servico-item-label');
+    toggle.setAttribute('aria-expanded', 'true');
+    label.textContent = 'Ver menos';
+    detail.style.maxHeight = detail.scrollHeight + 'px';
+  };
+
+  servicoItems.forEach(item => {
+    const toggle = item.querySelector('.servico-item-toggle');
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+
+      // Fecha qualquer outro item aberto (apenas um por vez)
+      servicoItems.forEach(other => {
+        if (other !== item) closeServicoItem(other);
+      });
+
+      if (isOpen) {
+        closeServicoItem(item);
+      } else {
+        openServicoItem(item);
+      }
+    });
+  });
 });
