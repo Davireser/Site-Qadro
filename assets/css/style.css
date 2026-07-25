@@ -1248,6 +1248,190 @@ img {
   letter-spacing: 0.01em;
 }
 
+/* --- Parceiros & Clientes (Depoimentos) --- */
+.parceiros-title-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--color-gray-200);
+  margin-top: 40px;
+  padding-top: 25px;
+}
+
+.parceiros-title-intro {
+  max-width: 320px;
+  text-align: right;
+  font-family: var(--font-altone);
+  font-weight: 300;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-gray-500);
+}
+
+.section-depoimento-destaque {
+  padding: 100px 0;
+}
+
+.depoimento-destaque {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.depoimento-destaque-quote {
+  font-family: var(--font-biorhyme);
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  max-width: 900px;
+  color: var(--color-white);
+  margin-bottom: 45px;
+}
+
+.depoimento-destaque-autor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.depoimento-destaque-autor h3 {
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.depoimento-destaque-linha {
+  width: 50px;
+  height: 1px;
+  background-color: var(--color-gray-500);
+}
+
+.depoimento-destaque-autor p {
+  font-family: var(--font-altone);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gray-400);
+}
+
+.depoimentos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px 50px;
+}
+
+.depoimento-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.depoimento-texto {
+  font-family: var(--font-altone);
+  font-weight: 300;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--color-gray-600);
+  border-bottom: 1px solid var(--color-gray-200);
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.depoimento-autor h4 {
+  font-family: var(--font-altone);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-black-pantone);
+  margin-bottom: 4px;
+}
+
+.depoimento-autor span {
+  font-family: var(--font-altone);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-gray-500);
+}
+
+.clientes-titulo {
+  font-family: var(--font-biorhyme);
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-black-pantone);
+  margin-bottom: 20px;
+}
+
+.clientes-subtitle {
+  font-family: var(--font-altone);
+  font-weight: 300;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-gray-500);
+  max-width: 340px;
+  margin-bottom: 60px;
+}
+
+.clientes-marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.clientes-marquee-row {
+  overflow: hidden;
+  width: 100%;
+}
+
+.clientes-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  width: max-content;
+  animation: clientes-marquee-scroll 32s linear infinite;
+}
+
+.clientes-marquee-row-reverse .clientes-marquee-track {
+  animation-direction: reverse;
+}
+
+.clientes-marquee-track img {
+  height: 42px;
+  width: auto;
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: var(--transition-fast);
+}
+
+.clientes-marquee-track img:hover {
+  opacity: 1;
+}
+
+@keyframes clientes-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* A trilha repete cada conjunto de logos 6x; andar 1/6 do total
+       equivale a exatamente uma repetição, fechando o loop sem deixar
+       espaço vazio mesmo em telas bem largas. */
+    transform: translateX(calc(-100% / 6));
+  }
+}
+
 /* --- Entre Em Contato (CTA) --- */
 .section-cta {
   background-color: #F2F2F2;
@@ -1683,6 +1867,36 @@ img {
   .equipe-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .parceiros-title-footer {
+    justify-content: flex-start;
+  }
+
+  .parceiros-title-intro {
+    max-width: none;
+    text-align: left;
+  }
+
+  .depoimento-destaque-quote {
+    font-size: 1.2rem;
+  }
+
+  .depoimentos-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .clientes-titulo {
+    font-size: 1.8rem;
+  }
+
+  .clientes-marquee-track {
+    gap: 45px;
+  }
+
+  .clientes-marquee-track img {
+    height: 32px;
   }
 
   .carousel-img {
