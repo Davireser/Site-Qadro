@@ -79,7 +79,7 @@ img {
 ======================================================================== */
 @font-face {
   font-family: 'Turnpike';
-  src: url('../Fontes/Turnpike.ttf') format('truetype');
+  src: url('../fonts/Turnpike.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -87,21 +87,21 @@ img {
 
 @font-face {
   font-family: 'BioRhyme';
-  src: url('../Fontes/BioRhyme-Regular.ttf') format('truetype');
+  src: url('../fonts/BioRhyme-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'BioRhyme';
-  src: url('../Fontes/BioRhyme-Light.ttf') format('truetype');
+  src: url('../fonts/BioRhyme-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'BioRhyme';
-  src: url('../Fontes/BioRhyme-Bold.ttf') format('truetype');
+  src: url('../fonts/BioRhyme-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -109,35 +109,35 @@ img {
 
 @font-face {
   font-family: 'Altone';
-  src: url('../Fontes/Altone-Regular.ttf') format('truetype');
+  src: url('../fonts/Altone-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Altone';
-  src: url('../Fontes/Altone-Light.ttf') format('truetype');
+  src: url('../fonts/Altone-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Altone';
-  src: url('../Fontes/Altone-Medium.ttf') format('truetype');
+  src: url('../fonts/Altone-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Altone';
-  src: url('../Fontes/Altone-SemiBold.ttf') format('truetype');
+  src: url('../fonts/Altone-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Altone';
-  src: url('../Fontes/Altone-Bold.ttf') format('truetype');
+  src: url('../fonts/Altone-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
