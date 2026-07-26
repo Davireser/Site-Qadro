@@ -831,14 +831,15 @@ img {
 }
 
 .servico-item-label {
-  font-family: var(--font-altone);
+  font-family: var(--font-turnpike);
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.55rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-gray-500);
+  color: var(--color-black-pantone);
   white-space: nowrap;
   flex-shrink: 0;
+  transform: translateY(8px);
   transition: var(--transition-fast);
 }
 
