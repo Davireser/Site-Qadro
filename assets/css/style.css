@@ -106,6 +106,13 @@ img {
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'BioRhyme';
+  src: url('../fonts/BioRhyme-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'Altone';
@@ -261,6 +268,27 @@ img {
   border-color: var(--color-beige-pantone);
 }
 
+/* Botão sólido em bloco, mesmo tom do "Chamar Qadro" da página de contato.
+   Usado como destaque no hero da home. */
+.btn-solid-escuro {
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  background-color: var(--color-black-pantone);
+  border-bottom: none;
+  padding: 18px 38px;
+  margin-top: 10px;
+  transition: var(--transition-fast);
+}
+
+.btn-solid-escuro:hover {
+  background-color: var(--color-blue-gray-pantone);
+  color: var(--color-white);
+}
+
 /* ========================================================================
 4. COMPONENTES
 ======================================================================== */
@@ -356,23 +384,6 @@ img {
   color: var(--color-black-pantone);
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-black-pantone);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform var(--transition-smooth);
-}
-
-.nav-link:hover::after, .nav-link.active::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
 
 .menu-toggle {
   display: none;
@@ -410,7 +421,9 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(26,30,36,0.3) 0%, rgba(26,30,36,0.7) 100%);
+  background:
+    linear-gradient(90deg, rgba(26,30,36,0.72) 0%, rgba(26,30,36,0.42) 45%, rgba(26,30,36,0.15) 100%),
+    linear-gradient(180deg, rgba(26,30,36,0.10) 0%, rgba(26,30,36,0.38) 100%);
   z-index: 1;
 }
 
@@ -750,7 +763,7 @@ img {
 
 .page-title {
   font-family: var(--font-biorhyme);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 2.6rem;
   line-height: 1.15;
   letter-spacing: -0.01em;
@@ -1058,13 +1071,41 @@ img {
 }
 
 /* --- Portfólio (Index Masonry & Tags) --- */
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.portfolio-header-intro {
+  flex: 1 1 420px;
+}
+
 .portfolio-intro {
-  max-width: 600px;
+  max-width: 520px;
   font-family: var(--font-altone);
   font-size: 0.95rem;
   font-weight: 300;
-  color: var(--color-gray-505);
+  color: var(--color-gray-500);
   line-height: 1.6;
+}
+
+.portfolio-tags-block {
+  flex: 0 1 480px;
+  text-align: right;
+}
+
+.portfolio-tags-label {
+  display: block;
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-black-pantone);
+  margin-bottom: 18px;
 }
 
 .portfolio-tags-filter {
@@ -1072,7 +1113,6 @@ img {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 10px 15px;
-  max-width: 700px;
 }
 
 .filter-tag {
@@ -1092,37 +1132,39 @@ img {
   border-color: var(--color-black-pantone);
 }
 
-.portfolio-grid {
+/* Grade alternada (efeito escada): duas colunas independentes, com a coluna
+   esquerda deslocada para baixo. O fluxo continua indefinidamente conforme
+   novos projetos são cadastrados. */
+.portfolio-masonry {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-  margin-top: 50px;
+  gap: 60px;
+  align-items: start;
 }
 
-.portfolio-item {
+.portfolio-column {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  gap: 90px;
 }
 
-.portfolio-item.full-width {
-  grid-column: span 2;
+.portfolio-column-left {
+  padding-top: 130px;
+}
+
+.portfolio-card {
+  display: block;
+}
+
+.portfolio-card-img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--color-gray-50);
   margin-bottom: 20px;
 }
 
-.portfolio-item.full-width .portfolio-img-wrapper {
-  height: 500px;
-}
-
-.portfolio-img-wrapper {
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  position: relative;
-}
-
-.portfolio-img-wrapper img {
+.portfolio-card-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1130,37 +1172,50 @@ img {
   transition: var(--transition-smooth);
 }
 
-.portfolio-item:hover .portfolio-img-wrapper img {
+.portfolio-card:hover .portfolio-card-img img {
   filter: grayscale(0%);
   transform: scale(1.03);
 }
 
-.portfolio-info {
+.portfolio-card-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-gray-200);
-  padding-bottom: 15px;
+  gap: 20px;
 }
 
-.portfolio-title-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.portfolio-title {
+.portfolio-card-title {
   font-family: var(--font-altone);
   font-size: 1.4rem;
   font-weight: 700;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--color-black-pantone);
+  line-height: 1.2;
 }
 
-.portfolio-item-tags {
+.portfolio-card-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--color-black-pantone);
+  transition: var(--transition-smooth);
+}
+
+.portfolio-card-arrow svg {
+  width: 22px;
+  height: 22px;
+}
+
+.portfolio-card:hover .portfolio-card-arrow {
+  transform: translateX(6px);
+  color: var(--color-blue-gray-pantone);
+}
+
+.portfolio-card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .item-tag {
@@ -1171,16 +1226,17 @@ img {
   color: var(--color-gray-400);
 }
 
-.portfolio-arrow {
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: var(--color-black-pantone);
-  transition: transform var(--transition-smooth);
+/* Primeiro projeto: card de destaque, mais largo que os demais. */
+.portfolio-card-highlight {
+  margin-bottom: 20px;
 }
 
-.portfolio-item:hover .portfolio-arrow {
-  transform: translateX(5px);
-  color: var(--color-blue-gray-pantone);
+.portfolio-card-highlight .portfolio-card-img {
+  aspect-ratio: 21 / 9;
+}
+
+.portfolio-card-highlight .portfolio-card-title {
+  font-size: 1.9rem;
 }
 
 /* --- Blog (Artigos Recentes) --- */
@@ -1477,21 +1533,24 @@ img {
   text-align: right;
 }
 
+/* Botão principal da seção: sólido para se destacar ao lado do título. */
 .btn-chamar-qadro {
-  font-family: var(--font-turnpike);
-  font-weight: normal;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #111111;
+  color: var(--color-white);
+  background-color: var(--color-black-pantone);
   border-bottom: none;
-  align-self: flex-end;
-  text-align: right;
-  margin-left: auto;
+  padding: 18px 38px;
+  margin-top: 10px;
+  transition: var(--transition-fast);
 }
 
-.btn-chamar-qadro::after {
-  display: none;
+.btn-chamar-qadro:hover {
+  background-color: var(--color-blue-gray-pantone);
+  color: var(--color-white);
 }
 
 
@@ -1732,6 +1791,811 @@ img {
   color: var(--color-white);
 }
 
+/* --- Portfólio (Detalhe do Projeto) --- */
+/* Ordem da página: título principal > resumo > imagem destaque >
+   nome do projeto + tags + descrição (métricas ao lado) > carrossel >
+   descrição 2 > outros projetos. */
+
+/* Título do projeto: mais leve que o das outras páginas. */
+.project-detail-title {
+  font-weight: 400;
+}
+
+.project-summary {
+  text-transform: uppercase;
+  max-width: 720px;
+}
+
+/* A imagem destaque sobe: o respiro grande já vem da seção do título. */
+.section-project-detail {
+  padding-top: 20px;
+}
+
+/* A imagem destaque mantém a proporção do arquivo enviado: quadrada aparece
+   quadrada, panorâmica aparece panorâmica. Nunca é cortada nem esticada. */
+.project-detail-hero {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.project-detail-hero img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 80vh;
+  margin: 0 auto;
+}
+
+/* --- Detalhe: nome do projeto, tags e descrição --- */
+.project-body-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 60px;
+  margin-bottom: 80px;
+}
+
+.project-name {
+  font-family: var(--font-biorhyme);
+  font-weight: 800;
+  font-size: 2.1rem;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--color-black-pantone);
+  margin-bottom: 18px;
+}
+
+.project-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 35px;
+}
+
+.project-detail-body {
+  max-width: 780px;
+}
+
+.project-detail-body p {
+  font-family: var(--font-altone);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--color-gray-600);
+  margin-bottom: 20px;
+}
+
+.project-detail-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Detalhe: métricas ao lado da descrição (1 a 4) --- */
+/* A coluna alarga e vira 2x2 quando há 3 ou 4 métricas. */
+.project-body-grid.has-metrics {
+  grid-template-columns: minmax(0, 1fr) 340px;
+}
+
+.project-body-grid.metrics-3,
+.project-body-grid.metrics-4 {
+  grid-template-columns: minmax(0, 1fr) 540px;
+}
+
+.project-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: start;
+  gap: 35px 30px;
+}
+
+.project-metrics[data-count="3"],
+.project-metrics[data-count="4"] {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.project-metrics[data-count="3"] .project-metric:last-child {
+  grid-column: 1 / -1;
+}
+
+.project-metric-value {
+  font-family: var(--font-altone);
+  font-weight: 400;
+  font-size: 3.8rem;
+  line-height: 1;
+  color: var(--color-black-pantone);
+  margin-bottom: 12px;
+  overflow-wrap: anywhere;
+}
+
+/* Menos métricas, mais espaço para cada número. */
+.project-metrics[data-count="1"] .project-metric-value {
+  font-size: 5rem;
+}
+
+.project-metrics[data-count="2"] .project-metric-value {
+  font-size: 4.2rem;
+}
+
+/* Em 2 colunas o número divide o espaço, então recua um pouco. */
+.project-metrics[data-count="3"] .project-metric-value,
+.project-metrics[data-count="4"] .project-metric-value {
+  font-size: 3.4rem;
+}
+
+.project-metric-label {
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gray-500);
+}
+
+/* --- Detalhe: carrossel de imagens --- */
+.project-carousel {
+  margin-bottom: 80px;
+}
+
+/* Palco quadrado, como no exemplo de carrossel. */
+.project-carousel-stage {
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  background-color: var(--color-gray-50);
+  margin: 0 auto 18px;
+  cursor: zoom-in;
+}
+
+.project-carousel-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.project-carousel-stage:hover img {
+  transform: scale(1.02);
+}
+
+.project-carousel-thumbs {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Setas discretas, centralizadas abaixo das miniaturas. */
+.project-carousel-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 32px;
+}
+
+.project-carousel-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--color-black-pantone);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.project-carousel-arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+.project-carousel-arrow:hover {
+  color: var(--color-blue-gray-pantone);
+  transform: scale(1.15);
+}
+
+.project-carousel-thumb {
+  width: 170px;
+  height: 170px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: var(--transition-fast);
+  background: none;
+  padding: 0;
+  border: none;
+}
+
+.project-carousel-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-carousel-thumb:hover,
+.project-carousel-thumb.active {
+  opacity: 1;
+}
+
+/* --- Detalhe: imagem ampliada (lightbox com zoom) --- */
+.project-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(20, 22, 26, 0.94);
+}
+
+.project-lightbox.open {
+  display: flex;
+}
+
+.project-lightbox-img {
+  max-width: 92vw;
+  max-height: 88vh;
+  cursor: zoom-in;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.project-lightbox-img.zoomed {
+  cursor: zoom-out;
+  transform: scale(2.5);
+  transition: transform 0.15s ease-out;
+}
+
+.project-lightbox-close,
+.project-lightbox-arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--color-white);
+  opacity: 0.7;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.project-lightbox-close:hover,
+.project-lightbox-arrow:hover {
+  opacity: 1;
+}
+
+.project-lightbox-close {
+  top: 26px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.project-lightbox-arrow {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+}
+
+.project-lightbox-arrow svg {
+  width: 26px;
+  height: 26px;
+}
+
+.project-lightbox-arrow.prev {
+  left: 24px;
+}
+
+.project-lightbox-arrow.next {
+  right: 24px;
+}
+
+.project-lightbox-hint {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-altone);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  opacity: 0.55;
+}
+
+/* --- Detalhe: descrição 2 (alinhada à direita, como no layout) --- */
+/* --- Detalhe: outros projetos --- */
+.related-grid-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.related-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.related-project-card {
+  display: block;
+}
+
+.related-project-img {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background-color: var(--color-gray-50);
+  margin-bottom: 16px;
+}
+
+.related-project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.related-project-card:hover .related-project-img img {
+  transform: scale(1.05);
+}
+
+.related-project-title {
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-black-pantone);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.related-project-card:hover .related-project-title {
+  color: var(--color-blue-gray-pantone);
+}
+
+.related-project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* --- Blog (Listagem completa) --- */
+.blog-featured {
+  display: block;
+  margin-bottom: 70px;
+}
+
+.blog-featured-label {
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gray-400);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.blog-featured-img {
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.blog-featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-featured-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.blog-featured-title {
+  font-family: var(--font-altone);
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--color-black-pantone);
+  margin-bottom: 8px;
+}
+
+.blog-featured-meta {
+  font-family: var(--font-altone);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-gray-500);
+}
+
+.blog-featured-date {
+  font-family: var(--font-altone);
+  font-size: 0.75rem;
+  color: var(--color-gray-400);
+  margin-top: 6px;
+  display: block;
+}
+
+.blog-list-label {
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gray-400);
+  margin-bottom: 30px;
+  display: block;
+}
+
+.blog-list-item {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 30px;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.blog-list-thumb {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+}
+
+.blog-list-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: var(--transition-smooth);
+}
+
+.blog-list-item:hover .blog-list-thumb img {
+  filter: grayscale(0%);
+}
+
+.blog-list-date {
+  font-family: var(--font-altone);
+  font-size: 0.75rem;
+  color: var(--color-gray-400);
+  text-align: right;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.blog-list-title {
+  font-family: var(--font-altone);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--color-black-pantone);
+  margin-bottom: 10px;
+}
+
+.blog-list-excerpt {
+  font-family: var(--font-altone);
+  font-weight: 300;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-gray-500);
+  margin-bottom: 14px;
+}
+
+.blog-list-more {
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-black-pantone);
+  display: block;
+  text-align: right;
+}
+
+.blog-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.blog-pagination a,
+.blog-pagination span {
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--color-gray-400);
+  padding: 4px 6px;
+}
+
+.blog-pagination a:hover {
+  color: var(--color-black-pantone);
+}
+
+.blog-pagination .current {
+  color: var(--color-black-pantone);
+  border-bottom: 1px solid var(--color-black-pantone);
+}
+
+/* --- Blog (Artigo) --- */
+.article-category {
+  font-family: var(--font-altone);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-gray-500);
+  margin-bottom: 40px;
+  display: block;
+}
+
+.article-label {
+  font-family: var(--font-altone);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gray-400);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.article-summary {
+  font-family: var(--font-altone);
+  font-weight: 300;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-gray-600);
+  max-width: 720px;
+  margin-top: 10px;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 45px;
+}
+
+/* O corpo é montado no editor de blocos: cada bloco controla a própria largura. */
+.article-body,
+.project-blocks {
+  width: 100%;
+}
+
+/* O conteúdo em blocos do projeto (abaixo do carrossel) usa a mesma
+   tipografia do corpo do artigo — são os mesmos blocos. */
+.project-blocks {
+  margin-top: 60px;
+}
+
+.article-body p,
+.project-blocks p {
+  font-family: var(--font-altone);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--color-gray-600);
+  margin-bottom: 22px;
+}
+
+.article-body p:last-child,
+.project-blocks p:last-child {
+  margin-bottom: 0;
+}
+
+.article-image {
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.article-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Blocos do artigo (montados no painel admin) --- */
+.post-block {
+  margin-bottom: 45px;
+}
+
+.post-block:last-child {
+  margin-bottom: 0;
+}
+
+/* Bloco de texto */
+.post-block-text-full {
+  max-width: 780px;
+}
+
+.post-block-text-narrow {
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Bloco de imagem */
+.post-block-image {
+  margin-top: 10px;
+}
+
+.post-block-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.post-block-image figcaption {
+  font-family: var(--font-altone);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--color-gray-500);
+  margin-top: 12px;
+}
+
+.post-block-image-full {
+  width: 100%;
+}
+
+.post-block-image-half {
+  width: 50%;
+}
+
+.post-block-image-third {
+  width: 33.333%;
+}
+
+.post-block-align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-block-align-center figcaption {
+  text-align: center;
+}
+
+.post-block-align-left {
+  margin-right: auto;
+}
+
+.post-block-align-right {
+  margin-left: auto;
+}
+
+.post-block-align-right figcaption {
+  text-align: right;
+}
+
+/* Bloco texto + imagem lado a lado */
+.post-block-split {
+  display: grid;
+  gap: 50px;
+  align-items: center;
+}
+
+.post-block-split-50-50 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.post-block-split-60-40 {
+  grid-template-columns: 1.5fr 1fr;
+}
+
+.post-block-split-40-60 {
+  grid-template-columns: 1fr 1.5fr;
+}
+
+/* Inverte a ordem visual sem mexer na ordem do HTML (a imagem vem primeiro). */
+.post-block-split-invert .post-block-split-img {
+  order: 2;
+}
+
+.post-block-split-img img {
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Citação em destaque, no estilo do manifesto da home */
+.post-block-quote {
+  font-family: var(--font-biorhyme);
+  font-weight: 700;
+  font-size: 1.9rem;
+  line-height: 1.35;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-black-pantone);
+  max-width: 900px;
+  margin: 70px auto;
+}
+
+/* Espaçamento / divisor */
+.post-block-spacer {
+  margin-bottom: 0;
+}
+
+.post-block-spacer-small {
+  height: 30px;
+}
+
+.post-block-spacer-medium {
+  height: 70px;
+}
+
+.post-block-spacer-large {
+  height: 130px;
+}
+
+/* --- Prévia do artigo (barra do topo, só no painel) --- */
+.preview-bar {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 40px;
+  background-color: var(--color-black-pantone);
+  color: var(--color-white);
+}
+
+.preview-bar-tag {
+  font-family: var(--font-altone);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.preview-bar-close {
+  font-family: var(--font-altone);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-black-pantone);
+  background: var(--color-white);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.preview-cover-note {
+  font-family: var(--font-altone);
+  font-size: 0.8rem;
+  color: var(--color-gray-500);
+  border: 1px dashed var(--color-gray-200);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
 /* ========================================================================
 5. RESPONSIVIDADE (Breakpoints)
 ======================================================================== */
@@ -1852,6 +2716,30 @@ img {
   .footer-top {
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
+  }
+
+  /* Portfólio (detalhe) */
+  .project-body-grid.has-metrics,
+  .project-body-grid.metrics-3,
+  .project-body-grid.metrics-4 {
+    grid-template-columns: minmax(0, 1fr) 260px;
+  }
+
+  .project-metrics[data-count="3"],
+  .project-metrics[data-count="4"] {
+    grid-template-columns: 1fr;
+  }
+
+  .project-metrics[data-count="3"] .project-metric:last-child {
+    grid-column: auto;
+  }
+
+  .project-carousel-stage {
+    max-width: 560px;
+  }
+
+  .related-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -2051,5 +2939,162 @@ img {
     flex-direction: column;
     gap: 20px;
     align-items: flex-start;
+  }
+
+  /* Em telas pequenas o zigue-zague vira uma coluna única. As colunas deixam
+     de existir como caixas (display: contents) e o `order` de cada card
+     restaura a ordem cadastrada no admin. */
+  .portfolio-masonry {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .portfolio-column {
+    display: contents;
+  }
+
+  .portfolio-tags-block {
+    text-align: left;
+  }
+
+  .portfolio-tags-filter {
+    justify-content: flex-start;
+  }
+
+  .portfolio-card-highlight .portfolio-card-title {
+    font-size: 1.4rem;
+  }
+
+  .project-detail-hero {
+    height: 300px;
+    margin-bottom: 40px;
+  }
+
+  .project-body-grid,
+  .project-body-grid.has-metrics,
+  .project-body-grid.metrics-3,
+  .project-body-grid.metrics-4 {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+
+  .project-name {
+    font-size: 1.5rem;
+  }
+
+  .project-metrics,
+  .project-metrics[data-count="3"],
+  .project-metrics[data-count="4"] {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px 20px;
+  }
+
+  .project-metrics[data-count="1"] {
+    grid-template-columns: 1fr;
+  }
+
+  .project-metric-value,
+  .project-metrics[data-count="1"] .project-metric-value,
+  .project-metrics[data-count="2"] .project-metric-value,
+  .project-metrics[data-count="3"] .project-metric-value,
+  .project-metrics[data-count="4"] .project-metric-value {
+    font-size: 2rem;
+  }
+
+  .project-carousel {
+    margin-bottom: 50px;
+  }
+
+  .project-carousel-stage {
+    max-width: 100%;
+  }
+
+  .project-lightbox-arrow.prev {
+    left: 6px;
+  }
+
+  .project-lightbox-arrow.next {
+    right: 6px;
+  }
+
+  .project-carousel-nav {
+    gap: 30px;
+    margin-top: 24px;
+  }
+
+  .project-carousel-thumb {
+    width: 90px;
+    height: 90px;
+  }
+
+  .related-projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .related-project-img {
+    height: 200px;
+  }
+
+  .blog-featured-img {
+    height: 260px;
+  }
+
+  .blog-featured-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .blog-list-item {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-list-date {
+    text-align: left;
+  }
+
+  .article-image {
+    height: 260px;
+  }
+
+  /* Blocos do artigo: tudo em coluna única no celular. */
+  .post-block {
+    margin-bottom: 35px;
+  }
+
+  .post-block-image-half,
+  .post-block-image-third {
+    width: 100%;
+  }
+
+  .post-block-split,
+  .post-block-split-50-50,
+  .post-block-split-60-40,
+  .post-block-split-40-60 {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .post-block-split-invert .post-block-split-img {
+    order: 0;
+  }
+
+  .post-block-quote {
+    font-size: 1.2rem;
+    margin: 45px auto;
+  }
+
+  .post-block-spacer-large {
+    height: 70px;
+  }
+
+  .post-block-spacer-medium {
+    height: 45px;
+  }
+
+  .preview-bar {
+    padding: 12px 20px;
   }
 }

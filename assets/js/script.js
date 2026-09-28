@@ -57,11 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   // 2. NAVEGAÇÃO DE PÁGINA (LINK ATIVO CONFORME A PÁGINA ATUAL)
   // ==========================================================================
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const currentPage = window.location.pathname.split('/').pop() || 'index.php';
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (!href || href === '#') return;
-    const linkPage = href.split('#')[0] || 'index.html';
+    const linkPage = href.split('#')[0] || 'index.php';
     if (linkPage === currentPage) {
       navLinks.forEach(l => l.classList.remove('active'));
       link.classList.add('active');

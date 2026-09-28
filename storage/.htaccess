@@ -1,0 +1,10 @@
+# Bloqueia qualquer acesso HTTP direto a esta pasta.
+# As imagens só podem ser lidas pelo PHP, através de includes/image.php.
+
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+</IfModule>

@@ -1,1 +1,18 @@
 design/
+backup/
+
+# Credenciais do banco (use includes/config.example.php como modelo)
+includes/config.php
+
+# Uploads de imagens do painel admin (dados de usuário, não versionados)
+storage/uploads/*
+!storage/uploads/.gitkeep
+
+.env
+*.sql
+*.log
+error_log
+node_modules/
+vendor/
+.DS_Store
+Thumbs.db
